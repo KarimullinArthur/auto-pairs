@@ -4,7 +4,7 @@
 " Last Change:  2019-02-02
 " Version: 2.0.0
 " Homepage: http://www.vim.org/scripts/script.php?script_id=3599
-" Repository: https://github.com/jiangmiao/auto-pairs
+" Repository: https://github.com/KarimullinArthur/auto-pairs
 " License: MIT
 
 if exists('g:AutoPairsLoaded') || &cp
@@ -61,10 +61,6 @@ end
 
 if !exists('g:AutoPairsCenterLine')
   let g:AutoPairsCenterLine = 1
-end
-
-if !exists('g:AutoPairsShortcutToggle')
-  let g:AutoPairsShortcutToggle = '<M-p>'
 end
 
 if !exists('g:AutoPairsShortcutFastWrap')
