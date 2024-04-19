@@ -63,6 +63,10 @@ if !exists('g:AutoPairsCenterLine')
   let g:AutoPairsCenterLine = 1
 end
 
+if !exists('g:AutoPairsShortcutToggle')
+ command AutoPairsShortcutToggle call g:AutoPairsShortcutToggle())
+end
+
 if !exists('g:AutoPairsShortcutFastWrap')
   let g:AutoPairsShortcutFastWrap = '<M-e>'
 end
@@ -77,9 +81,9 @@ endif
 
 " Fly mode will for closed pair to jump to closed pair instead of insert.
 " also support AutoPairsBackInsert to insert pairs where jumped.
-if !exists('g:AutoPairsFlyMode')
-  let g:AutoPairsFlyMode = 0
-endif
+"if !exists('g:AutoPairsFlyMode')
+"  let g:AutoPairsFlyMode = 1
+"endif
 
 " When skipping the closed pair, look at the current and
 " next line as well.
@@ -88,9 +92,9 @@ if !exists('g:AutoPairsMultilineClose')
 endif
 
 " Work with Fly Mode, insert pair where jumped
-if !exists('g:AutoPairsShortcutBackInsert')
-  let g:AutoPairsShortcutBackInsert = '<M-b>'
-endif
+"if !exists('g:AutoPairsShortcutBackInsert')
+"  let g:AutoPairsShortcutBackInsert = '<M-b>'
+"endif
 
 if !exists('g:AutoPairsSmartQuotes')
   let g:AutoPairsSmartQuotes = 1
@@ -287,11 +291,11 @@ func! AutoPairsInsert(key)
 
 
   " Fly Mode, and the key is closed-pairs, search closed-pair and jump
-  if g:AutoPairsFlyMode &&  a:key =~ '\v[\}\]\)]'
-    if search(a:key, 'We')
-      return "\<Right>"
-    endif
-  endif
+"  if g:AutoPairsFlyMode &&  a:key =~ '\v[\}\]\)]'
+"    if search(a:key, 'We')
+"      return "\<Right>"
+"    endif
+"  endif
 
   return a:key
 endf
@@ -449,7 +453,7 @@ func! AutoPairsMap(key)
   execute 'inoremap <buffer> <silent> '.key." <C-R>=AutoPairsInsert('".escaped_key."')<CR>"
 endf
 
-func! AutoPairsToggle()
+fun! AutoPairsToggle()
   if b:autopairs_enabled
     let b:autopairs_enabled = 0
     echo 'AutoPairs Disabled.'
@@ -458,7 +462,7 @@ func! AutoPairsToggle()
     echo 'AutoPairs Enabled.'
   end
   return ''
-endf
+endfun
 
 func! s:sortByLength(i1, i2)
   return len(a:i2[0])-len(a:i1[0])
@@ -558,9 +562,9 @@ func! AutoPairsInit()
     execute 'inoremap <buffer> <silent> '.g:AutoPairsShortcutFastWrap.' <C-R>=AutoPairsFastWrap()<CR>'
   end
 
-  if g:AutoPairsShortcutBackInsert != ''
-    execute 'inoremap <buffer> <silent> '.g:AutoPairsShortcutBackInsert.' <C-R>=AutoPairsBackInsert()<CR>'
-  end
+"  if g:AutoPairsShortcutBackInsert != ''
+"    execute 'inoremap <buffer> <silent> '.g:AutoPairsShortcutBackInsert.' <C-R>=AutoPairsBackInsert()<CR>'
+"  end
 
   if g:AutoPairsShortcutToggle != ''
     " use <expr> to ensure showing the status when toggle
